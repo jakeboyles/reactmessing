@@ -21,9 +21,14 @@ var Main = React.createClass({
 
   render: function(){
     console.log("App:",this.state.data);
+
       return (
-          <Day data={this.state.data} />
-      );
+          <div>
+          {this.state.data.map(w =>
+            <Day key={w} data={w} />
+          )}
+          </div>
+      ); 
   }
 });
 
