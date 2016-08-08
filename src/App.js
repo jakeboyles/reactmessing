@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+// Yeah I know...
 import $ from 'jquery';
 import Day from './Day';
 
@@ -20,11 +21,11 @@ var Main = React.createClass({
     });
   },
 
-handleCityChange: function(e) {
-   this.setState({value: e.target.value});
-},
+  handleCityChange: function(e) {
+    this.setState({value: e.target.value});
+  },
 
-handleChange: function(event) {
+  handleChange: function(event) {
     this.setState({value: this.state.value});
 
     this.serverRequest = $.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.value}&mode=json&units=imperial&cnt=7&APPID=7cf16558d759d14815306832bd7341e2`, (result) => {
@@ -37,17 +38,15 @@ handleChange: function(event) {
   },
 
   render: function(){
-
       return (
           <div>
-          <form onSubmit={this.handleChange}>
-            <input onChange={this.handleCityChange} type="text" />
-            <button type="submit">Go</button>
-          </form>
-
-          {this.state.data.map(w =>
-            <Day key={w.temp.day} data={w} />
-          )}
+            <form onSubmit={this.handleChange}>
+              <input onChange={this.handleCityChange} type="text" />
+              <button type="submit">Go</button>
+            </form>
+            {this.state.data.map((w,ind) =>
+              <Day key={ind} data={w} />
+            )}
           </div>
       ); 
   }
