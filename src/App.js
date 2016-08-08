@@ -9,7 +9,8 @@ var Main = React.createClass({
   getInitialState: function(){
     return {
       data:[],
-      value: "Cincinnati"
+      value: "Cincinnati",
+      city:"Cincinnati",
     }
   },
 
@@ -17,6 +18,7 @@ var Main = React.createClass({
     this.serverRequest = $.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.value}&mode=json&units=imperial&cnt=7&APPID=7cf16558d759d14815306832bd7341e2`, (result) => {
       this.setState({
         data: result.list,
+        city:result.city.name,
       });
     });
   },
@@ -25,12 +27,13 @@ var Main = React.createClass({
     this.setState({value: e.target.value});
   },
 
-  handleChange: function(event) {
-    this.setState({value: this.state.value});
-
+  submitLocation: function(event) {
+  
     this.serverRequest = $.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.value}&mode=json&units=imperial&cnt=7&APPID=7cf16558d759d14815306832bd7341e2`, (result) => {
       this.setState({
         data: result.list,
+        value:"",
+        city:result.city.name,
       });
     });
 
@@ -40,10 +43,12 @@ var Main = React.createClass({
   render: function(){
       return (
           <div>
-            <form onSubmit={this.handleChange}>
-              <input onChange={this.handleCityChange} type="text" />
+            <form onSubmit={this.submitLocation}>
+              <input value={this.state.value} onChange={this.handleCityChange} type="text" />
               <button type="submit">Go</button>
             </form>
+
+            <p>Getting weather for: {this.state.city}</p>
             {this.state.data.map((w,ind) =>
               <Day key={ind} data={w} />
             )}
