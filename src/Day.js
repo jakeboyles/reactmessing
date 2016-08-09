@@ -2,11 +2,13 @@ import React from 'react';
 import './App.css';
 import moment from 'moment';
 
-const Day = ({ data }) => {
+const Day = function({data}) {
   let time = moment.unix(data.dt).format("dddd");
   return (
-      <div>
-          <h2>The temp will be: {data.temp.day} on {time} </h2>
+      <div className='day'>
+          <h4>{time}</h4>
+          <h2>Max: {data.temp.max}</h2>
+          <h2>Min: {data.temp.min}</h2>
       </div>
   );
 };

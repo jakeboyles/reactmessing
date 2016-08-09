@@ -1,35 +1,42 @@
 import React from 'react';
 import './App.css';
+
 // Yeah I know...
 import $ from 'jquery';
 import Day from './Day';
 
-var Main = React.createClass({
+class Main extends React.Component {
 
-  getInitialState: function(){
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       data:[],
       value: "Cincinnati",
       city:"Cincinnati",
-    }
-  },
+    };
 
-  componentWillMount: function() {
-    this.serverRequest = $.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.value}&mode=json&units=imperial&cnt=7&APPID=7cf16558d759d14815306832bd7341e2`, (result) => {
+    this.handleCityChange = this.handleCityChange.bind(this);
+    this.submitLocation = this.submitLocation.bind(this);
+
+  }
+
+  componentWillMount() {
+    $.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.value}&mode=json&units=imperial&cnt=7&APPID=7cf16558d759d14815306832bd7341e2`, (result) => {
       this.setState({
         data: result.list,
         city:result.city.name,
       });
     });
-  },
+  };
 
-  handleCityChange: function(e) {
-    this.setState({value: e.target.value});
-  },
+  handleCityChange(e) {
+     this.setState({value: e.target.value});
+  };
 
-  submitLocation: function(event) {
+  submitLocation(e) {
   
-    this.serverRequest = $.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.value}&mode=json&units=imperial&cnt=7&APPID=7cf16558d759d14815306832bd7341e2`, (result) => {
+    $.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.value}&mode=json&units=imperial&cnt=7&APPID=7cf16558d759d14815306832bd7341e2`, (result) => {
       this.setState({
         data: result.list,
         value:"",
@@ -37,10 +44,10 @@ var Main = React.createClass({
       });
     });
 
-    event.preventDefault();
-  },
+    e.preventDefault();
+  };
 
-  render: function(){
+  render(){
       return (
           <div>
             <form onSubmit={this.submitLocation}>
@@ -48,13 +55,13 @@ var Main = React.createClass({
               <button type="submit">Go</button>
             </form>
 
-            <p>Getting weather for: {this.state.city}</p>
+            <p>Getting weather for: <b>{this.state.city}</b></p>
             {this.state.data.map((w,ind) =>
               <Day key={ind} data={w} />
             )}
           </div>
       ); 
   }
-});
+};
 
 export default Main;

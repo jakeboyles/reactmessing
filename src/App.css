@@ -18,6 +18,25 @@
   font-size: large;
 }
 
+form,p {
+  margin-left:40px;
+  margin-top:20px;
+}
+
+form input, button {
+  padding:10px 20px;
+}
+
+.day {
+  width:30%;
+  margin-left:3%;
+  display:inline-block;
+  background-color:lightGrey;
+  padding:20px;
+  box-sizing: border-box;
+  margin-bottom:40px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
