@@ -3,9 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
+    "eslint": "^3.3.0",
+    "eslint-config-airbnb": "^10.0.0",
+    "eslint-plugin-import": "^1.13.0",
+    "eslint-plugin-jsx-a11y": "^2.1.0",
+    "eslint-plugin-react": "^6.0.0",
     "react-scripts": "0.2.1"
   },
   "dependencies": {
+    "jquery": "^3.1.0",
     "moment": "^2.14.1",
     "react": "^15.2.1",
     "react-ajax": "^0.1.1",
