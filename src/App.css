@@ -41,3 +41,15 @@ form input, button {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.paragraph {
+  padding:0;
+  margin:0;
+}
+
+.icon {
+  float:right;
+  width:60px;
+  height:60px;
+  margin-top:-150px;
+}
