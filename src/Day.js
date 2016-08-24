@@ -3,9 +3,6 @@ import moment from 'moment';
 import './App.css';
 
 const Day = function Day({ data }) {
-  let propTypes = {
-    data: React.PropTypes.object,
-  };
   let time = moment.unix(data.dt).format('dddd');
   let icon = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
   return (

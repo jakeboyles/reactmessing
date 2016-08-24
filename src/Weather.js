@@ -3,7 +3,7 @@ import $ from 'jquery';
 import Day from './Day';
 import './App.css';
 
-class Main extends React.Component {
+class Weather extends React.Component {
 
   constructor(props) {
     super(props);
@@ -63,4 +63,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default Weather;
